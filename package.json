@@ -1,0 +1,18 @@
+{
+  "name": "runner",
+  "version": "1.0.0",
+  "description": "Runner game for js13k 2015",
+  "main": "index.html",
+  "devDependencies": {
+    "clean-css": "^3.4.1",
+    "html-minifier": "^0.7.2",
+    "uglify-js": "^2.4.24"
+  },
+  "scripts": {
+    "build": "build.sh",
+    "start": "open index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Herman Starikov",
+  "license": "MIT"
+}

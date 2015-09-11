@@ -1,0 +1,704 @@
+body {
+    overflow: hidden;
+    perspective: 1000px;
+    text-align: center;
+    font-family: fantasy;
+    background-color: #446;
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    background-image:
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+        radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 2px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    animation: zoom-in 1s 1;
+}
+
+@keyframes zoom-in {
+    0%   {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.player, .upper-body, .arm, .arm:after, .torso, .thigh, .track, .track-block, .wrapper, .wall {
+    transform-style: preserve-3d;
+}
+
+.player {
+    z-index: 4;
+    position: relative;
+    min-height: 256px;
+    transform: translateY(0) rotateX(-45deg);
+    transform-origin: bottom;
+}
+
+.head {
+    background: beige;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    border-bottom: 8px solid peachpuff;
+    border-radius: 50% 50% 0 0;
+}
+
+.upper-body {
+    margin: auto;
+}
+
+.upper-body > * {
+    display: inline-block;
+}
+
+.arm, .arm:after {
+    transform-origin: top;
+    background-color: peachpuff;
+    width: 16px;
+}
+
+.arm {
+    margin: auto -4px;
+    height: 16px;
+    border-top: teal 16px solid;
+    position: relative;
+}
+
+.arm:after {
+    margin: auto -8px;
+    content: "";
+    height: 32px;
+    position: absolute;
+    top: 16px;
+}
+
+.torso {
+    background: teal;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    border-bottom: #444 8px solid;
+    color: whitesmoke;
+    border-left-width: 0;
+    border-right-width: 0;
+    background-image:
+        repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 32px),
+        repeating-linear-gradient(60deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 32px),
+        linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
+        linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+    background-size: 32px 64px;
+}
+
+.score {
+    font-size: 1.5em;
+    line-height: 1em;
+    transform: translateY(0.25em);
+}
+
+.thigh {
+    animation-timing-function: ease;
+    transition: 1s;
+    background-color: peachpuff;
+    width: 20px;
+    height: 32px;
+    display: inline-block;
+    transform-origin: top;
+    position: relative;
+    margin: 0 8px;
+    border-top: #444 16px solid;
+    border-left-width: 0;
+    border-right-width: 0;
+    z-index: 3;
+}
+
+.thigh:after {
+    content: "";
+    transition: 1s;
+    background-color: silver;
+    width: 20px;
+    height: 32px;
+    display: inline-block;
+    transform-origin: top;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    border-top: teal double 16px;
+    border-bottom: solid #454 16px;
+}
+
+.shadow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    margin: auto;
+    z-index: 2;
+    position: relative;
+    width: 96px;
+    height: 32px;
+    transform: rotateX(0) translateY(44px);
+    transform-origin: bottom center;
+}
+
+/*
+ * running
+ */
+
+.running {
+    animation: runningBody 1s infinite;
+}
+
+@keyframes runningBody {
+    0%   {
+        transform: rotateZ(1deg) translateY(0) rotateX(-45deg);
+    }
+    25% {
+        transform: translateY(8px) rotateX(-45deg);
+    }
+    50% {
+        transform: rotateZ(-1deg) translateY(0) rotateX(-45deg);
+    }
+    75% {
+        transform: translateY(8px) rotateX(-45deg);
+    }
+    100% {
+        transform: rotateZ(1deg) translateY(0) rotateX(-45deg);
+    }
+}
+
+.running .arm:after {
+    transform-origin: top;
+    transform: rotateX(60deg);
+}
+
+.running .arm {
+    transform-origin: top;
+    animation: runningArm 1s infinite;
+}
+
+.running .arm:nth-of-type(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes runningArm {
+    0%   {
+        transform: rotateX(30deg);
+    }
+    50% {
+        transform: rotateX(-30deg);
+    }
+    100% {
+        transform: rotateX(30deg);
+    }
+}
+
+.running .thigh {
+    animation: runningThigh 1s infinite;
+}
+
+@keyframes runningThigh {
+    0%   {
+        transform: rotateX(70deg);
+    }
+    50% {
+        transform: rotateX(-30deg);
+    }
+    100% {
+        transform: rotateX(70deg);
+    }
+}
+
+.running .thigh:after {
+    animation: runningCalf 1s ease infinite;
+}
+
+@keyframes runningCalf {
+    0%   {
+        transform: rotateX(-30deg);
+    }
+    50% {
+        transform: rotateX(-50deg);
+    }
+    100% {
+        transform: rotateX(-30deg);
+    }
+}
+
+.running .thigh:nth-child(2n+1) {
+    animation-delay: 0.5s;
+}
+
+.running .thigh:nth-child(2n+1):after {
+    animation-delay: 0.5s;
+}
+
+.running .shadow {
+    animation: runningShadow 0.5s infinite;
+}
+
+@keyframes runningShadow {
+    0%   {
+        width: 100px;
+        height: 36px;
+    }
+    50%   {
+        width: 96px;
+        height: 32px;
+    }
+    100% {
+        width: 100px;
+        height: 36px;
+    }
+}
+
+/*
+ * jumping
+ */
+.jumping {
+    animation: jumpingBody 1.5s infinite;
+}
+
+@keyframes jumpingBody {
+    0%   {
+        transform: translateY(0px) rotateX(-45deg);
+    }
+    50% {
+        transform: translateY(-100px) rotateX(-45deg);
+    }
+    100% {
+        transform: translateY(70px) rotateX(-45deg);
+    }
+}
+
+.jumping .arm:after {
+    transform-origin: top left;
+    transform: rotateZ(-30deg);
+}
+
+.jumping .arm {
+    animation: jumpingLeftArm 1.5s infinite;
+}
+
+.jumping .arm:nth-of-type(3):after {
+    transform-origin: top right;
+    transform: rotateZ(30deg);
+}
+
+@keyframes jumpingLeftArm {
+    0%   {
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(30deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+.jumping .arm:nth-of-type(3) {
+    animation: jumpingRightArm 1.5s infinite;
+}
+
+@keyframes jumpingRightArm {
+    0%   {
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(-30deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+.jumping .thigh {
+    animation: jumpingThigh 1.5s infinite;
+}
+
+@keyframes jumpingThigh {
+    0%   {
+        transform: rotateX(64deg);
+    }
+    50% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(64deg);
+    }
+}
+
+.jumping .thigh:after {
+    animation: jumpingCalf 1.5s ease infinite;
+}
+
+@keyframes jumpingCalf {
+    0%   {
+        transform: rotateX(-100deg);
+    }
+    50% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(-100deg);
+    }
+}
+
+.jumping .shadow {
+    animation: jumpingShadow ease 1.5s infinite;
+}
+
+@keyframes jumpingShadow {
+    0%   {
+        width: 100px;
+        height: 36px;
+        transform: translateY(44px);
+    }
+    50%   {
+        width: 64px;
+        height: 24px;
+        transform: translateY(104px);
+    }
+    100% {
+        width: 100px;
+        height: 36px;
+        transform: translateY(4px);
+    }
+}
+
+/*
+ * falling
+ */
+
+.fell {
+    transition: 1s;
+    transform: translateY(500px);
+    opacity: 0;
+    z-index: 0;
+    animation: none;
+}
+
+.fell .shadow {
+    display: none;
+}
+
+/*
+ * track
+ */
+
+.track {
+    transform: rotateX(45deg) translateY(0);
+    transform-origin: top;
+    position: relative;
+    z-index: 1;
+}
+
+.track-block, .wrapper {
+    width: 128px;
+    height: 128px;
+    display: inline-block;
+    font-size: 0;
+}
+
+.track-block {
+    border-color: silver;
+    border-style: solid;
+    border-width: 4px;
+
+    background-color: silver;
+    background-image:
+        linear-gradient(335deg, #444 24px, transparent 24px),
+        linear-gradient(155deg, #222 24px, transparent 24px),
+        linear-gradient(335deg, #444 24px, transparent 24px),
+        linear-gradient(155deg, #666 24px, transparent 24px);
+    background-size: 64px 64px;
+    background-position: -4px -4px, 4px 34px, 28px 28px, 36px 2px;
+}
+
+.wrapper .straight {
+    border-bottom-width: 0;
+    border-top-width: 0;
+}
+
+.right-wrapper {
+    transform: rotateZ(-90deg);
+}
+
+.wrapper .right {
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 50%;
+}
+
+.down-wrapper {
+    transform: translateZ(-64px);
+}
+
+.wrapper .down {
+    transform: rotateX(-30deg) translateZ(54px) translateY(-35px);
+    margin-bottom: -25px;
+    transform-origin: top;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.up-wrapper {
+    transform: translateZ(64px);
+}
+
+.wrapper .up {
+    transform: rotateX(30deg) translateZ(-54px) translateY(-35px);
+    margin-bottom: -25px;
+    transform-origin: top;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.wrapper .jump, .wrapper .jump:after, .wrapper .jump:before {
+    border-color: darkseagreen;
+    background:
+        radial-gradient(
+            circle at 100% 50%,
+            transparent 15%,
+            rgba(255,255,255,.3) 16%,
+            rgba(255,255,255,.3) 29%,
+            transparent 30%,
+            transparent
+        ),
+        radial-gradient(
+            circle at 0% 50%,
+            transparent 15%,
+            rgba(255,255,255,.3) 16%,
+            rgba(255,255,255,.3) 29%,
+            transparent 30%, transparent
+        ) 0 32px;
+    background-color: seagreen;
+    background-size:64px 64px;
+    animation: wave 4s linear infinite;
+}
+
+.wrapper .jump:before {
+    content: "";
+    position: absolute;
+    transform: rotateY(90deg) translateX(64px);
+    width: 128px;
+    height: 128px;
+    opacity: 0.75;
+}
+
+.wrapper .jump:after {
+    content: "";
+    position: absolute;
+    transform: rotateY(-90deg) translateZ(128px) translateX(-64px);
+    width: 128px;
+    height: 128px;
+    opacity: 0.75;
+}
+
+@keyframes wave {
+    0%   {
+        background:
+            radial-gradient(
+                circle at 100% 50%,
+                transparent 15%,
+                rgba(255,255,255,.3) 16%,
+                rgba(255,255,255,.3) 29%,
+                transparent 30%,
+                transparent
+            ),
+            radial-gradient(
+                circle at 0% 50%,
+                transparent 15%,
+                rgba(255,255,255,.3) 16%,
+                rgba(255,255,255,.3) 29%,
+                transparent 30%, transparent
+            ) 0 32px;
+        background-color: seagreen;
+        background-size:64px 64px;
+    }
+    100% {
+        background:
+            radial-gradient(
+                circle at 100% 50%,
+                transparent 15%,
+                rgba(255,255,255,.3) 16%,
+                rgba(255,255,255,.3) 29%,
+                transparent 30%,
+                transparent
+            ) 64px 0,
+            radial-gradient(
+                circle at 0% 50%,
+                transparent 15%,
+                rgba(255,255,255,.3) 16%,
+                rgba(255,255,255,.3) 29%,
+                transparent 30%, transparent
+            ) 64px 32px;
+        background-color: seagreen;
+        background-size:64px 64px;
+
+    }
+}
+
+.left-wrapper {
+    transform: rotateZ(90deg);
+}
+
+.wrapper .left {
+    margin-top: -8px;
+    margin-right: -4px;
+    border-left-color: silver;
+    border-bottom-width: 0;
+    border-top-right-radius: 50%;
+}
+
+.track > .wrapper > .track-block {
+    animation: fade 1s ease-in 1;
+}
+
+.last {
+    animation: fade 1s ease-in 1 reverse;
+}
+
+@keyframes fade {
+    0%   {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+
+    }
+}
+
+/*
+ * start screen background
+ */
+
+.wall {
+    width: 512px;
+    top: 0;
+    left: 50%;
+    transform-origin: center 334px;
+    transform: translateX(-50%) rotateX(-45deg);
+}
+
+.left-behind {
+    transition: 2s;
+    opacity: 0;
+    transform: translateX(-50%) rotateX(-45deg) translateZ(-128px);
+}
+
+.wall:before, .wall:after, .wall {
+    position: absolute;
+    background-color: gray;
+    background-image:
+        linear-gradient(335deg, #444 24px, transparent 24px),
+        linear-gradient(155deg, #222 24px, transparent 24px),
+        linear-gradient(335deg, #666 24px, transparent 24px),
+        linear-gradient(155deg, #444 24px, transparent 24px);
+    background-size: 64px 64px;
+    background-position: -4px -4px, 4px 34px, 28px 28px, 36px 2px;
+    height: 100%;
+}
+
+.wall:before, .wall:after {
+    content: "";
+    width: 128px;
+}
+
+.wall:before {
+    left: 0;
+    transform-origin: left;
+    transform: rotateY(120deg);
+}
+
+.wall:after {
+    right: 0;
+    transform-origin: right;
+    transform: rotateY(-120deg);
+}
+
+.wall .door {
+    background-color: #222;
+    width: 128px;
+    height: 293px;
+    position: absolute;
+    border-radius: 96px 96px 0 0;
+    left: 50%;
+    top: 32px;
+    transform: translateX(-50%);
+    border: 32px #444;
+    border-style: groove;
+}
+
+.speech {
+    display: block;
+    top: 32px;
+    position: absolute;
+    left: 32px;
+    list-style: none;
+    padding: 8px;
+    background-color: whitesmoke;
+    border: black 2px solid;
+    border-radius: 16px;
+}
+
+.speech em {
+    font-size: 0.75em;
+}
+
+.speech:after {
+    content: "";
+    width: 0;
+    height: 0;
+    background: transparent;
+    position: absolute;
+    bottom: 64px;
+    right: -16px;
+    border: 8px solid transparent;
+    border-left-color: whitesmoke;
+}
+
+/*
+ * hint keys
+ */
+
+.keys {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.keys > * {
+    margin: 16px;
+    line-height: 2em;
+    min-width: 2em;
+    font-size: 2em;
+    border: 2px #dde solid;
+    color: #dde;
+    border-radius: 8px;
+    display: inline-block;
+    text-shadow: 0 0 4px #444;
+    opacity: 0;
+    transition: 0.2s;
+    transform: translateY(8px);
+}
+
+.keys #right,
+.keys #left {
+    float: right;
+}
+
+.keys #left {
+    margin-right: 64px;
+}
+
+.keys #jump {
+    width: 400px;
+}
+
+.keys .to-be-pressed {
+    opacity: 1;
+    transform: translateY(-8px);
+}
