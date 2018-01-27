@@ -1,6 +1,8 @@
 Drake's quest :runner:
 ----------------------
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Hermanya/js13k-2015.svg)](https://greenkeeper.io/)
+
 ![drake's dream](screenshots/small-screenshot.png)
 
 My entry for [js13k](http://js13kgames.com/) 2015 game contest.
