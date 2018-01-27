@@ -4,9 +4,9 @@
   "description": "Runner game for js13k 2015",
   "main": "index.html",
   "devDependencies": {
-    "clean-css": "^3.4.1",
-    "html-minifier": "^0.7.2",
-    "uglify-js": "^2.4.24"
+    "clean-css": "^4.1.9",
+    "html-minifier": "^3.5.8",
+    "uglify-js": "^3.3.9"
   },
   "scripts": {
     "build": "build.sh",
